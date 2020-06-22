@@ -15,8 +15,8 @@ const Message = ({ message: { user, text }, name }) => {
     isSentByCurrentUser ? (
       <div className="messageContainer justifyEnd">
         <p className="sentText pr-10">{trimmedName}</p>
-        <div className="messageBox backgroundBlue">
-          <p className="messageText colorWhite">{ReactEmoji.emojify(text)}</p>
+        <div className="messageBox backgroundGreen">
+          <p className="messageText colorDark">{ReactEmoji.emojify(text)}</p>
         </div>
       </div>
     ) : 

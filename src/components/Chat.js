@@ -4,6 +4,7 @@ import io from 'socket.io-client'
 import InfoBar from './InfoBar'
 import Input from './Input'
 import Messages from './Messages'
+import TextContainer from './TextContainer'
 import './Chat.css'
 
 let socket
@@ -11,6 +12,7 @@ let socket
 const Chat = ({location}) => {
   const [name, setName] = useState('')
   const [room, setRoom] = useState('')
+  const [users, setUsers] = useState('')
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
 
@@ -26,18 +28,24 @@ const Chat = ({location}) => {
     
     socket.emit('join', { name, room })
 
-    return () => {
-      
-      socket.emit('disconnect')
-      socket.off()
-
-    }
+    
   }, [ENDPOINT, location.search])
 
   useEffect(() => {
     socket.on('message', (message) => {
       setMessages([...messages, message])
     })
+    socket.on("roomData", ({ users }) => {
+      setUsers(users)
+    })
+
+    return () => {
+
+      socket.emit('disconnect')
+      socket.off()
+
+    }
+
   }, [messages])
 
   const sendMessage = (event) => {
@@ -48,13 +56,23 @@ const Chat = ({location}) => {
 
 
   return (
+    <>
     <div className="outerContainer">
-      <div className="container">
-        <InfoBar room={room}/>
-        <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
-        <Messages messages={messages} name={name}/>
+      <div className="iphone">
+        <div className="circle"></div>
+        <div className="camera"></div>
+        <div className="speaker"></div>
+        <div className="screen">
+          <InfoBar room={room}/>
+          <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
+          <Messages messages={messages} name={name}/>
+        </div>
+        <div className="home1"></div>
+        <div className="home2"></div>
       </div>
+      <TextContainer users={users} />
     </div>
+    </>
   )
 }
 
