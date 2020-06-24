@@ -2,10 +2,7 @@ html, body {
   font-family: 'Roboto', sans-serif;
   padding: 0;
   margin: 0;
-}
-
-#root {
-  height: 100vh;
+  background: rgb(73, 90, 99);
 }
 
 * {
@@ -29,6 +26,7 @@ html, body {
   border-radius: 0;
   padding: 15px 20px;
   width: 100%;
+  font-size: 1rem;
 }
 
 .heading {
@@ -54,15 +52,29 @@ html, body {
   margin-top: 20px;
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
-  .joinOuterContainer {
-    height: 100%;
-  }
+@media (min-width: 320px) and (max-width: 500px) {
 
   .joinInnerContainer {
-    width: 90%;
+    width: 80%;
   }
 
+}
+
+
+@media (min-width: 501px) and (max-width: 800px) {
+
+  .joinInnerContainer {
+    width: 40%;
+  }
+
+}
+
+
+@media (min-width: 801px) and (max-width: 1024px) {
+
+  .joinInnerContainer {
+    width: 30%;
+  }
 
 }
 
